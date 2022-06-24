@@ -251,13 +251,13 @@ func TestTools_CreateDir(t *testing.T) {
 	_ = os.Remove("./testdata/testDir")
 }
 
-func TestTools_HandleError(t *testing.T) {
+func TestTools_LogError(t *testing.T) {
 	var testTool Tools
 	var errStr bytes.Buffer
 
 	log.SetOutput(&errStr)
 
-	testTool.HandleError(errors.New("error message"))
+	testTool.LogError(errors.New("error message"))
 
 	msg := strings.Split(strings.TrimSuffix(errStr.String(), "\n"), " ")[3:]
 
