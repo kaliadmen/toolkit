@@ -9,10 +9,12 @@ import (
 	"image/png"
 	"io"
 	"io/ioutil"
+	"log"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"strings"
 	"testing"
 )
 
@@ -247,4 +249,20 @@ func TestTools_CreateDir(t *testing.T) {
 	}
 
 	_ = os.Remove("./testdata/testDir")
+}
+
+func TestTools_HandleError(t *testing.T) {
+	var testTool Tools
+	var errStr bytes.Buffer
+
+	log.SetOutput(&errStr)
+
+	testTool.HandleError(errors.New("error message"))
+
+	msg := strings.Split(strings.TrimSuffix(errStr.String(), "\n"), " ")[3:]
+
+	if strings.Join(msg, " ") != "error message" {
+		t.Error(errors.New(fmt.Sprintf("error message did not log correctly; message: %v", msg)))
+	}
+
 }

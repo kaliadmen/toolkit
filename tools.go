@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path"
@@ -205,4 +206,11 @@ func (t *Tools) CreateDir(path string) error {
 		}
 	}
 	return nil
+}
+
+//HandleError checks if an error occurred
+func (t *Tools) HandleError(err error) {
+	if err != nil {
+		log.Printf("error: %v\n", err)
+	}
 }
