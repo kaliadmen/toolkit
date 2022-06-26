@@ -208,7 +208,7 @@ func (t *Tools) CreateDir(path string) error {
 	return nil
 }
 
-//HandleError checks if an error occurred
+//LogError checks if an error occurred and logs it
 func (t *Tools) LogError(err error) {
 	if err != nil {
 		log.Printf("error: %v\n", err)
